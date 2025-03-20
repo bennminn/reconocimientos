@@ -162,11 +162,9 @@
         } else {
           // Después de revelar el mensaje, mostrar el nombre con explosión
           setTimeout(() => {
-            word.textContent += "<br>. Melanie Campusano.";  
+            word.innerHTML += "<br>1. Melanie Campusano.<br>2. Segundo Castillo.<br>3. Tercero Tercio.";
             word.classList.add('explosion');  
             addConfetti(); 
-            word.textContent += "<br>2. Segundo Castillo.";  
-            word.textContent += "<br>3. Tercero Tercio.";  
           }, 500); 
         }
       };
