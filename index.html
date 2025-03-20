@@ -33,7 +33,7 @@
       z-index: 10;
       width: auto; /* Aseguramos que el texto esté por encima del confeti */
     }
-    #button {
+    .button {
       background-color: #FFB81C; /* Amarillo Walmart */
       border: none;
       padding: 15px 30px;
@@ -45,9 +45,9 @@
       margin-top: 20px;
       z-index: 10;
     }
-    #button:hover {
+    .button:hover {
       background-color: #FFD500; /* Amarillo más brillante */
-      transform: scale(2.0);
+      transform: scale(1.1);
     }
     #countdown {
       font-size: 3rem;
@@ -117,22 +117,49 @@
   <div id="logo">
     <img src="https://i.pinimg.com/564x/4c/2d/fb/4c2dfb70d241b830cc9701e6d4f53583.jpg" alt="Logo">
   </div>
-  <h1>Reconocimiento de Enero</h1>
+  <h1>Reconocimientos de Febreo</h1>
   <div id="countdown"></div>
   <div id="word"></div>
-  <button id="button">Revelar Resultado</button>
+  <button class="button" id="buttonCompanero">Revelar "El mejor compañero"</button>
+  <button class="button" id="buttonRegalon">Revelar "El más regalón"</button>
 
   <script>
     const word = document.getElementById('word');
-    const button = document.getElementById('button');
+    const buttonCompanero = document.getElementById('buttonCompanero');
+    const buttonRegalon = document.getElementById('buttonRegalon');
     const countdownDisplay = document.getElementById('countdown');
 
-    const palabras = [
+    const palabrasCompanero = [
       "Felicitaciones al mejor compañero del mes..."
     ];
 
-    button.addEventListener('click', () => {
-      let countdown = 10;
+    const palabrasRegalon = [
+      "Felicitaciones al más regalón del mes..."
+    ];
+
+    const namesCompanero = [
+      "Jazmin Vasquez",
+      "Maolys Carolina Espinoza Nava",
+      "Carla Andrea Valenzuela"
+      
+    ];
+
+    const namesRegalon = [
+      "Martin Albornoz",
+      "Alejandro Chaparro",
+      "Jazmin Vasquez"
+    ];
+
+    buttonCompanero.addEventListener('click', () => {
+      startCountdown(palabrasCompanero, namesCompanero);
+    });
+
+    buttonRegalon.addEventListener('click', () => {
+      startCountdown(palabrasRegalon, namesRegalon);
+    });
+
+    function startCountdown(palabras, names) {
+      let countdown = 5;
       countdownDisplay.textContent = countdown;
       const countdownInterval = setInterval(() => {
         countdown--;
@@ -140,12 +167,12 @@
         if (countdown === 0) {
           clearInterval(countdownInterval);
           countdownDisplay.textContent = ''; // Limpiar el contador
-          revealWord();
+          revealWord(palabras, names);
         }
       }, 1000);
-    });
+    }
 
-    function revealWord() {
+    function revealWord(palabras, names) {
       const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
 
       // Primero, mostrar el mensaje
@@ -161,11 +188,8 @@
         } else {
           // Después de revelar el mensaje, mostrar el nombre con explosión
           setTimeout(() => {
-            const names = [
-              "Melanie Campusano",
-              "Segundo Castillo",
-              "Tercero Tercio"
-            ];
+            // Limpiar cualquier nombre anterior
+            word.innerHTML = palabraAleatoria;
 
             names.forEach((name, i) => {
               const nameElement = document.createElement('div');
