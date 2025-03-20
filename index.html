@@ -18,9 +18,9 @@
       color: #FFB81C; /* Amarillo Walmart */
     }
     img {
-        border-radius: 30%;
-        height: 150px;
-        width: auto;
+      border-radius: 30%;
+      height: 150px;
+      width: auto;
     }
     #word {
       font-size: 3rem;
@@ -80,7 +80,6 @@
       0% {
         transform: translateY(-100vh) rotate(0deg);
       }
-
       100% {
         transform: translateY(100vh) rotate(360deg);
       }
@@ -162,7 +161,21 @@
         } else {
           // Después de revelar el mensaje, mostrar el nombre con explosión
           setTimeout(() => {
-            word.textContent += " Melanie Campusano.";  
+            const names = [
+              "Melanie Campusano",
+              "Segundo Castillo",
+              "Tercero Tercio"
+            ];
+
+            names.forEach((name, i) => {
+              const nameElement = document.createElement('div');
+              nameElement.innerHTML = `${i + 1}. ${name}`;
+              nameElement.style.fontSize = '2rem';
+              nameElement.style.marginTop = '10px';
+              nameElement.style.animation = 'fadeIn 1s ease';
+              word.appendChild(nameElement);
+            });
+
             word.classList.add('explosion');  
             addConfetti(); 
           }, 500); 
@@ -171,6 +184,20 @@
 
       setTimeout(revelarLetra, 200); // Iniciar la revelación del mensaje
     }
+
+    // Add fadeIn animation to CSS
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
 
     // Función para agregar confeti
     function addConfetti() {
